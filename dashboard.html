@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Panel - Boost</title>
+</head>
+<body class="bg-gray-900 text-white p-10">
+    <div class="max-w-2xl mx-auto">
+        <div class="flex justify-between mb-10">
+            <h1 class="text-3xl font-bold">Kontrol Paneli</h1>
+            <span class="bg-green-500/20 text-green-500 px-3 py-1 rounded-full text-sm font-bold border border-green-500">Sistem Çevrimiçi</span>
+        </div>
+        
+        <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
+            <h2 class="text-xl mb-4 text-blue-400">Yeni Hesap Ekle</h2>
+            <input id="su" placeholder="Steam Kullanıcı Adı" class="w-full p-2 mb-2 bg-gray-700 rounded border-none">
+            <input id="sp" type="password" placeholder="Steam Şifre" class="w-full p-2 mb-2 bg-gray-700 rounded border-none">
+            <input id="g" placeholder="Oyun ID'leri (Örn: 730, 440)" class="w-full p-2 mb-4 bg-gray-700 rounded border-none">
+            <button onclick="addSteam()" class="w-full bg-green-600 p-3 rounded font-bold">Boost Başlat</button>
+        </div>
+    </div>
+
+    <script>
+        async function addSteam() {
+            const res = await fetch('/api/add-steam', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({steamUser: su.value, steamPass: sp.value, games: g.value})
+            });
+            if(res.ok) alert("Boost Başlatıldı!");
+        }
+    </script>
+</body>
+</html>

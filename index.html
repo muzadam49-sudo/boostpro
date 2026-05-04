@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Steam Boost Pro - Giriş</title>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center h-screen">
+    <div class="bg-gray-800 p-8 rounded-xl shadow-2xl w-96 border border-gray-700">
+        <h1 class="text-2xl font-bold mb-6 text-blue-400 text-center">Steam Boost Pro</h1>
+        <input id="u" type="text" placeholder="Kullanıcı Adı" class="w-full p-3 mb-4 bg-gray-900 rounded border border-gray-600 outline-none focus:border-blue-500">
+        <input id="p" type="password" placeholder="Şifre" class="w-full p-3 mb-6 bg-gray-900 rounded border border-gray-600 outline-none focus:border-blue-500">
+        <button onclick="login()" class="w-full bg-blue-600 hover:bg-blue-700 p-3 rounded font-bold transition">Giriş Yap</button>
+        <p class="text-sm text-gray-400 mt-4 text-center cursor-pointer hover:underline" onclick="register()">Hesabın yok mu? Kayıt Ol</p>
+    </div>
+
+    <script>
+        async function login() {
+            const res = await fetch('/api/login', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({username: u.value, password: p.value})
+            });
+            if(res.ok) window.location.href = '/dashboard.html';
+            else alert("Hatalı giriş!");
+        }
+    </script>
+</body>
+</html>
